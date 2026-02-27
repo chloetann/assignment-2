@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OSIM Smart Dock</title>
+
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+
+<style>
+body{
+  margin:0;
+  font-family: Arial, sans-serif;
+  background:#F7F6F4;
+  color:#4A3F3A;
+}
+
+/* PAGE LAYOUT */
+.page{
+  display:flex;
+  height:100vh;
+}
+
+/* LEFT SIDE - 3D */
+.viewer{
+  flex:1;
+  background:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
+
+.viewer model-viewer{
+  width:90%;
+  height:90%;
+}
+
+/* LOGO */
+.logo{
+  position:absolute;
+  top:30px;
+  left:40px;
+  width:140px;
+  z-index:20;
+}
+
+/* HOTSPOTS */
+.Hotspot{
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  background:white;
+  border:2px solid #4A3F3A;
+  cursor:pointer;
+  transition:0.2s ease;
+}
+
+.Hotspot:hover{
+  transform:scale(1.2);
+  box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+.HotspotAnnotation{
+  position:absolute;
+  left:22px;
+  top:-8px;
+  background:white;
+  padding:6px 14px;
+  border-radius:20px;
+  font-size:13px;
+  white-space:nowrap;
+  box-shadow:0 10px 25px rgba(0,0,0,0.15);
+  visibility:hidden;
+  color:#4A3F3A;
+}
+
+/* RIGHT SIDE */
+.info{
+  width:420px;
+  padding:40px;
+  background:#F7F6F4;
+  box-shadow:-8px 0 30px rgba(0,0,0,0.05);
+  overflow-y:auto;
+}
+
+.badge{
+  background:#F7931E;
+  color:white;
+  padding:6px 12px;
+  font-size:12px;
+  border-radius:20px;
+  display:inline-block;
+  margin-bottom:15px;
+}
+
+h1{
+  margin:10px 0;
+}
+
+.rating{
+  color:#F7931E;
+  font-size:14px;
+  margin-bottom:15px;
+}
+
+.price{
+  font-size:26px;
+  font-weight:bold;
+}
+
+.old-price{
+  text-decoration:line-through;
+  color:#aaa;
+  margin-left:10px;
+  font-size:16px;
+}
+
+/* DESCRIPTION */
+.description{
+  margin-top:15px;
+  line-height:1.6;
+}
+
+.description ul{
+  padding-left:18px;
+  margin-top:10px;
+}
+
+.description li{
+  margin-bottom:6px;
+  color:#6A5C56;
+}
+
+/* BUTTON SECTIONS */
+.section{
+  margin-top:30px;
+}
+
+.section h3{
+  margin-bottom:10px;
+}
+
+.section button{
+  margin:5px 5px 5px 0;
+  padding:8px 16px;
+  border-radius:20px;
+  border:1px solid #ddd;
+  background:white;
+  cursor:pointer;
+  transition:0.2s ease;
+  color:#4A3F3A;
+}
+
+.section button:hover{
+  background:#2BB673;
+  color:white;
+  border-color:#2BB673;
+}
+
+/* QUANTITY */
+.qty{
+  display:flex;
+  align-items:center;
+  margin-top:25px;
+  gap:15px;
+}
+
+.qty button{
+  width:38px;
+  height:38px;
+  border-radius:8px;
+  border:1px solid #ddd;
+  background:white;
+  font-size:18px;
+  cursor:pointer;
+  transition:0.2s ease;
+}
+
+.qty button:hover{
+  background:#F7931E;
+  color:white;
+  border-color:#F7931E;
+}
+
+.qty span{
+  font-size:16px;
+  font-weight:600;
+}
+
+/* ADD TO CART */
+.cart-btn{
+  margin-top:30px;
+  width:100%;
+  padding:16px;
+  background:#4A3F3A;
+  color:white;
+  border:none;
+  font-weight:600;
+  font-size:15px;
+  border-radius:8px;
+  cursor:pointer;
+  transition:0.3s ease;
+}
+
+.cart-btn:hover{
+  background:#F7931E;
+}
+</style>
+</head>
+
+<body>
+
+<img src="logo.jpg" class="logo">
+
+<div class="page">
+
+  <!-- LEFT SIDE -->
+  <div class="viewer">
+
+    <model-viewer
+      id="gear"
+      src="DVE ASSIGNMENT 2.glb"
+      camera-controls
+      shadow-intensity="1"
+      animation-name="PHONE"
+      camera-orbit="auto auto auto"
+      field-of-view="30deg">
+
+      <!-- HOTSPOTS -->
+      <button class="Hotspot" slot="hotspot-1"
+        data-surface="0 0 2436 2438 2510 0.395 0.148 0.458"
+        onmouseover="showHotspot('h1')" 
+        onmouseout="hideHotspot('h1')">
+          <div class="HotspotAnnotation" id="h1">Physical UI</div>
+      </button>
+
+      <button class="Hotspot" slot="hotspot-2"
+        data-surface="9 0 337 339 403 0.513 0.245 0.242"
+        onmouseover="showHotspot('h2')" 
+        onmouseout="hideHotspot('h2')">
+          <div class="HotspotAnnotation" id="h2">Phone Dock</div>
+      </button>
+
+      <button class="Hotspot" slot="hotspot-3"
+        data-surface="10 0 787 759 788 0.378 0.390 0.232"
+        onmouseover="showHotspot('h3')" 
+        onmouseout="hideHotspot('h3')">
+          <div class="HotspotAnnotation" id="h3">Lamp Frame</div>
+      </button>
+
+      <button class="Hotspot" slot="hotspot-4"
+        data-surface="0 0 4382 1278 4481 0.795 0.136 0.069"
+        onmouseover="showHotspot('h4')" 
+        onmouseout="hideHotspot('h4')">
+          <div class="HotspotAnnotation" id="h4">Speaker</div>
+      </button>
+
+    </model-viewer>
+
+  </div>
+
+  <!-- RIGHT SIDE -->
+  <div class="info">
+
+    <div class="badge">BEST SELLER</div>
+    <h1>LUMI</h1>
+
+    <div class="rating">★★★★★ 167 reviews</div>
+
+    <div class="price">
+      $129.00
+      <span class="old-price">$159.00</span>
+    </div>
+
+    <!-- UPDATED DESCRIPTION -->
+    <div class="description">
+      <p><strong>Multi-functional smart lamp dock</strong></p>
+      <ul>
+        <li>Phone dock for charging and connectivity</li>
+        <li>Built-in speaker for music and audio</li>
+        <li>Warm ambient lighting</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h3>Variants</h3>
+      <button onclick="VBtn01()">Beige</button>
+      <button onclick="VBtn02()">Rose Gold</button>
+      <button onclick="VBtn03()">Marble</button>
+      <button onclick="VBtn04()">Metal Blue</button>
+    </div>
+
+    <div class="section">
+      <h3>Angles</h3>
+      <button onclick="setOrbit('0deg 90deg auto')">Front</button>
+      <button onclick="setOrbit('90deg 90deg auto')">Side</button>
+      <button onclick="setOrbit('0deg 0deg auto')">Top</button>
+      <button onclick="setOrbit('0deg 180deg auto')">Bottom</button>
+    </div>
+
+    <div class="section">
+      <h3>Animation</h3>
+      <button onclick="Btn01()">Phone Dock</button>
+      <button onclick="Btn02()">Lamp Frame</button>
+      <button onclick="pauseAnimation()">Pause</button>
+    </div>
+
+    <div class="qty">
+      <button onclick="decreaseQty()">−</button>
+      <span id="quantity">1</span>
+      <button onclick="increaseQty()">+</button>
+    </div>
+
+    <button class="cart-btn">ADD TO CART</button>
+
+  </div>
+
+</div>
+
+<script>
+const gear = document.getElementById('gear');
+let qty = 1;
+
+function setOrbit(orbit){ gear.cameraOrbit = orbit; }
+function VBtn01(){ gear.variantName="v1"; }
+function VBtn02(){ gear.variantName="v2"; }
+function VBtn03(){ gear.variantName="v3"; }
+function VBtn04(){ gear.variantName="v4"; }
+
+function Btn01(){
+  gear.pause();
+  gear.animationName="PHONE";
+  gear.play();
+}
+
+function Btn02(){
+  gear.pause();
+  gear.animationName="FRAME TGT.002";
+  gear.play();
+}
+
+function pauseAnimation(){ gear.pause(); }
+
+function increaseQty(){
+  qty++;
+  document.getElementById("quantity").innerText = qty;
+}
+
+function decreaseQty(){
+  if(qty > 1){
+    qty--;
+    document.getElementById("quantity").innerText = qty;
+  }
+}
+
+function showHotspot(id){
+  document.getElementById(id).style.visibility="visible";
+}
+
+function hideHotspot(id){
+  document.getElementById(id).style.visibility="hidden";
+}
+</script>
+
+</body>
+</html>

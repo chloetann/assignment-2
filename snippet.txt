@@ -1,0 +1,20 @@
+<model-viewer src="DVE ASSIGNMENT 2.glb" ar ar-modes="scene-viewer webxr quick-look" camera-controls tone-mapping="neutral" poster="poster.png" shadow-intensity="1" animation-name="PHONE" camera-orbit="1398deg 79.87deg 596.9m" field-of-view="30deg" auto-rotate>
+    <button class="Hotspot" slot="hotspot-1" data-surface="0 0 2436 2438 2510 0.395 0.148 0.458" data-visibility-attribute="visible">
+        <div class="HotspotAnnotation">Physical UI</div>
+    </button><button class="Hotspot" slot="hotspot-2" data-surface="9 0 337 339 403 0.513 0.245 0.242" data-visibility-attribute="visible">
+        <div class="HotspotAnnotation">Phone Dock</div>
+    </button><button class="Hotspot" slot="hotspot-3" data-surface="10 0 787 759 788 0.378 0.390 0.232" data-visibility-attribute="visible">
+        <div class="HotspotAnnotation">Lamp</div>
+    </button><button class="Hotspot" slot="hotspot-4" data-surface="0 0 4382 1278 4481 0.795 0.136 0.069" data-visibility-attribute="visible">
+        <div class="HotspotAnnotation">Speaker</div>
+    </button>
+    <div class="progress-bar hide" slot="progress-bar">
+        <div class="update-bar"></div>
+    </div>
+    <button slot="ar-button" id="ar-button">
+        View in your space
+    </button>
+    <div id="ar-prompt">
+        <img src="https://modelviewer.dev/shared-assets/icons/hand.png">
+    </div>
+</model-viewer>
